@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Form = styled.form`
   width: 300px;
   display: flex;
-  flex-direction: column;
   gap: 15px;
   padding: 15px;
   margin-bottom: 30px;
   border: 1px solid #000000;
   border-radius: 4px;
+  flex-direction: column;
 `;
 
 export const Label = styled.label`
@@ -28,12 +28,11 @@ export const Input = styled.input`
 export const SubmitButton = styled.button`
   width: 120px;
   padding-top: 4px;
-  padding-bottom: 4px;
   margin-top: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 4px;
   cursor: pointer;
   background-color: transparent;
-
+  padding-bottom: 4px;
   }
 `;

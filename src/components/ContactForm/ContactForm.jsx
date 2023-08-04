@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
 import { selectContacts } from 'redux/selectors';
@@ -9,21 +10,28 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
+  const nameRef = useRef(null);
+  const numberRef = useRef(null);
+
   const handleSubmit = event => {
     event.preventDefault();
 
+    const name = nameRef.current.value;
+    const number = numberRef.current.value;
+
     const contact = {
       id: nanoid(),
-      name: event.currentTarget.elements.name.value,
-      number: event.currentTarget.elements.number.value,
+      name,
+      number,
     };
 
     const isExist = contacts.find(
-      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+      ({ name: existingName }) =>
+        existingName.toLowerCase() === name.toLowerCase()
     );
 
     if (isExist) {
-      return toast.warn(`${contact.name} is already in contacts.`);
+      return toast.warn(`${name} is already in contacts.`);
     }
 
     dispatch(addContact(contact));
@@ -35,6 +43,7 @@ export const ContactForm = () => {
       <Label htmlFor={nanoid()}>
         Name
         <Input
+          ref={nameRef}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -46,6 +55,7 @@ export const ContactForm = () => {
       <Label htmlFor={nanoid()}>
         Number
         <Input
+          ref={numberRef}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

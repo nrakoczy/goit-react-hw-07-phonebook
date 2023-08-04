@@ -7,13 +7,6 @@ const initialState = {
   error: null,
 };
 
-const handlePending = state => {
-  return {
-    ...state,
-    isLoading: true,
-  };
-};
-
 const handleRejected = (state, action) => {
   return {
     ...state,
@@ -22,17 +15,14 @@ const handleRejected = (state, action) => {
   };
 };
 
-const handleFetchContactsSuccess = (state, action) => {
-  return { ...state, isLoading: false, error: null, items: action.payload };
-};
-
-const handleAddContactSuccess = (state, action) => {
+const handlePending = state => {
   return {
     ...state,
-    isLoading: false,
-    error: null,
-    items: [action.payload, ...state.items],
+    isLoading: true,
   };
+};
+const handleFetchContactsSuccess = (state, action) => {
+  return { ...state, isLoading: false, error: null, items: action.payload };
 };
 
 const handleDeleteContactSuccess = (state, action) => {
@@ -41,6 +31,15 @@ const handleDeleteContactSuccess = (state, action) => {
     isLoading: false,
     error: null,
     items: state.items.filter(item => item.id !== action.payload.id),
+  };
+};
+
+const handleAddContactSuccess = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: null,
+    items: [action.payload, ...state.items],
   };
 };
 
