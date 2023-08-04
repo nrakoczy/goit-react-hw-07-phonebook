@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://64525eefbce0b0a0f744d446.mockapi.io';
+axios.defaults.baseURL = 'https://64ca991a700d50e3c70519ca.mockapi.io';
 
 const handleAsyncRequest = async (requestFn, thunkAPI) => {
   try {
